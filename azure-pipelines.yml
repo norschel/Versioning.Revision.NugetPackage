@@ -1,0 +1,36 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+
+name: $(MajorVersion).$(MinorVersion).$(Rev:r)
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+  majorVersion: 2
+  minorVersion: 0
+
+steps:
+- task: VersionAssemblies@2
+  inputs:
+    filePattern: '**/*.csproj'
+    versionSource: 'buildNumber'
+    versionFormat: 'threeParts'
+    replaceVersionFormat: 'threeParts'
+    failIfNoMatchFound: true
+  
+- script: dotnet build Demo.Versioning.sln --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.SourcesDirectory)/Demo.Versioning/bin/Release'
+    artifact: 'NuGet'
+    publishLocation: 'pipeline'

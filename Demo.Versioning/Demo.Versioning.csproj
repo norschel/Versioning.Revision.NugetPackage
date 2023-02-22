@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>Demo.Versioning</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Nico Orschel</Authors>
+    <Company>Xpirit Germany</Company>
+    <Description>The best package ever</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>release notes nico</PackageReleaseNotes>
+    <PackageTags>Versioning;Xpirit Demo</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+</Project>
